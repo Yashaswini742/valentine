@@ -30,6 +30,48 @@
       }
     }
 
+    /* Butterflies */
+    .butterfly {
+      position: absolute;
+      font-size: 28px;
+      animation: fly 8s linear infinite;
+      opacity: 0.8;
+    }
+
+    @keyframes fly {
+      0% {
+        transform: translateX(-10vw) translateY(100vh);
+        opacity: 0;
+      }
+      50% {
+        opacity: 1;
+      }
+      100% {
+        transform: translateX(40vw) translateY(-10vh);
+        opacity: 0;
+      }
+    }
+
+    /* Quotes */
+    #quoteBox {
+      position: absolute;
+      left: 5%;
+      bottom: 15%;
+      width: 30%;
+      font-size: 18px;
+      color: pink;
+      text-align: center;
+      opacity: 0;
+      animation: fadeQuote 4s infinite;
+    }
+
+    @keyframes fadeQuote {
+      0% { opacity: 0; }
+      25% { opacity: 1; }
+      75% { opacity: 1; }
+      100% { opacity: 0; }
+    }
+
     #revealBtn {
       position: absolute;
       top: 50%;
@@ -48,26 +90,43 @@
       display: none;
       position: absolute;
       top: 50%;
-      left: 50%;
+      left: 60%;
       transform: translate(-50%, -50%);
+      width: 35%;
     }
 
     img {
       width: 250px;
       border-radius: 20px;
-      box-shadow: 0 0 20px pink;
+      animation: glitter 2s infinite alternate;
+    }
+
+    @keyframes glitter {
+      0% {
+        box-shadow: 0 0 10px pink, 0 0 20px hotpink, 0 0 30px deeppink;
+        transform: scale(1);
+      }
+      100% {
+        box-shadow: 0 0 20px white, 0 0 40px pink, 0 0 60px hotpink;
+        transform: scale(1.05);
+      }
     }
   </style>
 </head>
+
 <body>
 
 <button id="revealBtn">Tap to reveal ❤️</button>
 
+<div id="quoteBox">You are my forever 💕</div>
+
 <div id="content">
   <img src="photo.jpg">
-  <h2> NIBHA ❤️</h2>
-  <p>My love, you are my safe place, my biggest cheerleader and my greatest love story.
-    Through all the seasons, through all of time... I love you. Happy Valentine’s Day 😘🤗💕</p>
+  <h2>NIBHA ❤️</h2>
+  <p>
+    My love, you are my safe place, my biggest cheerleader and my greatest love story.
+    Through all the seasons, through all of time... I love you. Happy Valentine’s Day 😘🤗💕
+  </p>
 </div>
 
 <audio id="song" src="song.mp4"></audio>
@@ -85,14 +144,42 @@
       heart.remove();
     }, 6000);
   }
-
   setInterval(createHeart, 300);
+
+  function createButterfly() {
+    const butterfly = document.createElement("div");
+    butterfly.className = "butterfly";
+    butterfly.innerHTML = "🦋";
+    butterfly.style.left = Math.random() * 30 + "vw";
+    butterfly.style.fontSize = (Math.random() * 15 + 20) + "px";
+    document.body.appendChild(butterfly);
+
+    setTimeout(() => {
+      butterfly.remove();
+    }, 8000);
+  }
+  setInterval(createButterfly, 1200);
+
+  const quotes = [
+    "You are my forever 💕",
+    "My heart chose you ❤️",
+    "Every moment with you is magic ✨",
+    "I fall for you every day 🥰",
+    "You are my safe place 💖"
+  ];
+
+  let qIndex = 0;
+  const quoteBox = document.getElementById("quoteBox");
+
+  setInterval(() => {
+    quoteBox.textContent = quotes[qIndex];
+    qIndex = (qIndex + 1) % quotes.length;
+  }, 4000);
 
   document.getElementById("revealBtn").onclick = function() {
     document.getElementById("revealBtn").style.display = "none";
     document.getElementById("content").style.display = "block";
-    const music = document.getElementById("song");
-    music.play();
+    document.getElementById("song").play();
   };
 </script>
 
