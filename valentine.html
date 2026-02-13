@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>For You ❤️</title>
+  <style>
+    body {
+      margin: 0;
+      background: black;
+      overflow: hidden;
+      font-family: Arial, sans-serif;
+      text-align: center;
+      color: white;
+    }
+
+    .heart {
+      position: absolute;
+      color: pink;
+      font-size: 20px;
+      animation: floatUp 6s linear infinite;
+    }
+
+    @keyframes floatUp {
+      0% {
+        transform: translateY(100vh) scale(1);
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(-10vh) scale(1.5);
+        opacity: 0;
+      }
+    }
+
+    #revealBtn {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      padding: 15px 25px;
+      font-size: 20px;
+      background: pink;
+      border: none;
+      border-radius: 30px;
+      cursor: pointer;
+      box-shadow: 0 0 20px hotpink;
+    }
+
+    #content {
+      display: none;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+
+    img {
+      width: 250px;
+      border-radius: 20px;
+      box-shadow: 0 0 20px pink;
+    }
+  </style>
+</head>
+<body>
+
+<button id="revealBtn">Tap to reveal ❤️</button>
+
+<div id="content">
+  <img src="photo.jpg">
+  <h2> NIBHA ❤️</h2>
+  <p>My love, you are my safe place, my biggest cheerleader and my greatest love story.
+    Through all the seasons, through all of time... I love you. Happy Valentine’s Day 😘🤗💕</p>
+</div>
+
+<audio id="song" src="song.mp4"></audio>
+
+<script>
+  function createHeart() {
+    const heart = document.createElement("div");
+    heart.className = "heart";
+    heart.innerHTML = "❤️";
+    heart.style.left = Math.random() * 100 + "vw";
+    heart.style.fontSize = (Math.random() * 20 + 10) + "px";
+    document.body.appendChild(heart);
+
+    setTimeout(() => {
+      heart.remove();
+    }, 6000);
+  }
+
+  setInterval(createHeart, 300);
+
+  document.getElementById("revealBtn").onclick = function() {
+    document.getElementById("revealBtn").style.display = "none";
+    document.getElementById("content").style.display = "block";
+    const music = document.getElementById("song");
+    music.play();
+  };
+</script>
+
+</body>
+</html>
